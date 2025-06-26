@@ -4,8 +4,8 @@
 header("Content-type: application/json");
 try {
     $module->validateApiToken();
-    $recordId = $module->createNewRecord();
-    echo json_encode(array("status" => 'success', "message" => 'Record created successfully', 'record_id' => $recordId));
+    $record = $module->createNewRecord();
+    echo json_encode(array_merge( array("status" => 'success', "message" => 'Record created successfully'), $record));
 }catch (Exception $e) {
 
     $statusCode = http_response_code();

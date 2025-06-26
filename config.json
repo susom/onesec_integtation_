@@ -32,7 +32,12 @@
     ],
 
     "project-settings": [
-
+        {
+            "key": "screening-instrument",
+            "name": "<h6><strong>Screening Instrument</strong></h6><i>.</i>",
+            "required": true,
+            "type": "form-list"
+        }
     ],
 
     "system-settings": [

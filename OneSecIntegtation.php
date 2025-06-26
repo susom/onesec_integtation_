@@ -86,10 +86,16 @@ class OneSecIntegtation extends \ExternalModules\AbstractExternalModule
                     throw new \Exception($response['errors']);
                 }
             }
-            // TODO redirect to screening survey
-            return reset($response['ids']);
+            if(empty($this->getProjectSetting('screening-instrument', $this->projectId))){
+                throw new \Exception("Missing Screening Instrument");
+            }
+            $instrument = $this->getProjectSetting('screening-instrument', $this->projectId);
+            $recordId = reset($response['ids']);
+            $url = \REDCap::getSurveyLink($recordId, $instrument, '', 1, $this->projectId);
+            $result = array('recordId' => $recordId, 'screening_url' => $url);
+            return $result;
         }else{
-            throw new \Exception("Records already exist");
+            throw new \Exception("Record already exist!");
         }
     }
 }
