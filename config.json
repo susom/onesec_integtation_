@@ -17,10 +17,6 @@
         }
     ],
 
-    "permissions": [
-
-    ],
-
     "enable-every-page-hooks-on-system-pages": false,
     "links": {
         "project": [
@@ -32,7 +28,7 @@
     },
 
     "no-auth-pages": [
-
+        "api/create_record"
     ],
 
     "project-settings": [
@@ -40,7 +36,18 @@
     ],
 
     "system-settings": [
-
+        {
+            "key": "redcap-api-token",
+            "name": "<h6><strong>API token</strong></h6><i>Token OneSec will use to create records in REDCap.</i>",
+            "required": true,
+            "type": "text"
+        },
+        {
+            "key": "redcap-project-id",
+            "name": "<h6><strong>REDCap project</strong></h6><i>Select the project where you want to create the records.</i>",
+            "required": true,
+            "type": "project-id"
+        }
     ],
 
     "crons": [
