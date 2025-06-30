@@ -30,6 +30,9 @@
     "no-auth-pages": [
         "api/create_record"
     ],
+    "no-csrf-pages": [
+        "api/create_record"
+    ],
 
     "project-settings": [
         {
