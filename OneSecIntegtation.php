@@ -98,4 +98,52 @@ class OneSecIntegtation extends \ExternalModules\AbstractExternalModule
             throw new \Exception("Record already exist!");
         }
     }
+
+    public function getRecordExternalId($record)
+    {
+        $param= array('record_id' => $record, 'project_id' => $this->projectId);
+        $response = \REDCap::getData($param);
+        if(empty($response['errors'])){
+            return $response[$record][$this->getFirstEventId()]['external_id'];
+        }
+    }
+    public function redcap_survey_complete ( $project_id, $record = NULL, $instrument, $event_id, $group_id = NULL, $survey_hash, $response_id = NULL, $repeat_instance = 1 )
+    {
+        try{
+            if($record && $instrument == $this->getProjectSetting('parental-consent-instrument') && $this->getProjectSetting('one-sec-url')){
+                if(!$this->getProjectSetting('child-assent-instrument')){
+                    throw new \Exception("Missing Screening Instrument");
+                }
+                $url = \REDCap::getSurveyLink($record, $this->getProjectSetting('child-assent-instrument'), '', 1, $project_id);
+
+                \REDCap::logEvent("Assent URL: ", $url);
+                // TODO make call to OneSec
+                $client = new \GuzzleHttp\Client();
+
+                $body = array(
+                   'redcap_record_id' => $record,
+                    'external_id' => $this->getRecordExternalId($record),
+                    "message"=> "Parental Consent Completed",
+                    "assent_url" => $url,
+                    "timestamp" => date('Y-m-d H:i:s', time()),
+                    "participant"=> "CHILD"
+                );
+                $response = $client->post($this->getProjectSetting('one-sec-url'), [
+                    'debug' => false,
+                    'form_params' => $body,
+                    'headers' => [
+                        'Content-Type' => 'application/x-www-form-urlencoded',
+                        'Accept' => 'application/json'
+                    ]
+                ]);
+                if ($response->getStatusCode() < 300) {
+                    $data = json_decode($response->getBody());
+                    \REDCap::logEvent("OneSec Acknowledgement ", json_encode($data));
+                }
+
+            }
+        }catch (\Exception $e){
+            \REDCap::logEvent("Exception: ", $e->getMessage());
+        }
+    }
 }

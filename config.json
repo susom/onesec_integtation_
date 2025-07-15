@@ -40,6 +40,24 @@
             "name": "<h6><strong>Screening Instrument</strong></h6><i>.</i>",
             "required": true,
             "type": "form-list"
+        },
+        {
+            "key": "parental-consent-instrument",
+            "name": "<h6><strong>Parental Consent Instrument</strong></h6><i>.</i>",
+            "required": true,
+            "type": "form-list"
+        },
+        {
+            "key": "child-assent-instrument",
+            "name": "<h6><strong>Child Assent Instrument</strong></h6><i>.</i>",
+            "required": true,
+            "type": "form-list"
+        },
+        {
+            "key": "one-sec-url",
+            "name": "<h6><strong>OneSec App API Endpoint</strong></h6><i>.</i>",
+            "required": true,
+            "type": "text"
         }
     ],
 
