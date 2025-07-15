@@ -113,7 +113,7 @@ class OneSecIntegtation extends \ExternalModules\AbstractExternalModule
     public function redcap_survey_complete ( $project_id, $record = NULL, $instrument, $event_id, $group_id = NULL, $survey_hash, $response_id = NULL, $repeat_instance = 1 )
     {
         try{
-            if($record && $instrument == $this->getProjectSetting('parental-consent-instrument') && $this->getProjectSetting('one-sec-url')){
+            if($record && $instrument == $this->getProjectSetting('parental-consent-instrument') && $this->getSystemSetting('one-sec-url')){
                 if(!$this->getProjectSetting('child-assent-instrument')){
                     throw new \Exception("Missing Screening Instrument");
                 }
@@ -131,7 +131,7 @@ class OneSecIntegtation extends \ExternalModules\AbstractExternalModule
                     "timestamp" => date('Y-m-d H:i:s', time()),
                     "participant"=> "CHILD"
                 );
-                $response = $client->post($this->getProjectSetting('one-sec-url'), [
+                $response = $client->post($this->getSystemSetting('one-sec-url'), [
                     'debug' => false,
                     'form_params' => $body,
                     'headers' => [

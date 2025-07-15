@@ -52,12 +52,6 @@
             "name": "<h6><strong>Child Assent Instrument</strong></h6><i>.</i>",
             "required": true,
             "type": "form-list"
-        },
-        {
-            "key": "one-sec-url",
-            "name": "<h6><strong>OneSec App API Endpoint</strong></h6><i>.</i>",
-            "required": true,
-            "type": "text"
         }
     ],
 
@@ -73,6 +67,12 @@
             "name": "<h6><strong>REDCap project</strong></h6><i>Select the project where you want to create the records.</i>",
             "required": true,
             "type": "project-id"
+        },
+        {
+            "key": "one-sec-url",
+            "name": "<h6><strong>OneSec App API Endpoint</strong></h6><i>.</i>",
+            "required": true,
+            "type": "text"
         }
     ],
 
