@@ -13,9 +13,12 @@ class OneSecIntegtation extends \ExternalModules\AbstractExternalModule
     {
         parent::__construct();
         // Other code to run when object is instantiated
-        $this->projectId = $this->getSystemSetting('redcap-project-id');
-        $this->apiToken = $this->getSystemSetting('redcap-api-token');
-        $this->project = new \Project($this->projectId);
+        if($this->getSystemSetting('redcap-project-id') && $this->getSystemSetting('redcap-api-token'))
+        {
+            $this->projectId = $this->getSystemSetting('redcap-project-id');
+            $this->apiToken = $this->getSystemSetting('redcap-api-token');
+            $this->project = new \Project($this->projectId);
+        }
     }
 
     public function getAuthorizationHeader()
