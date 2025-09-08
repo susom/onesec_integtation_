@@ -131,12 +131,16 @@ class OneSecIntegtation extends \ExternalModules\AbstractExternalModule
                     "timestamp" => date('Y-m-d H:i:s', time()),
                     "participant"=> "CHILD"
                 );
+
+                $token = $this->getSystemSetting('onesec-api-token');
+
                 $response = $client->post($this->getSystemSetting('one-sec-url'), [
                     'debug' => false,
                     'form_params' => $body,
                     'headers' => [
                         'Content-Type' => 'application/x-www-form-urlencoded',
-                        'Accept' => 'application/json'
+                        'Accept' => 'application/json',
+                        'Authorization' => "Bearer $token"
                     ]
                 ]);
                 if ($response->getStatusCode() < 300) {

@@ -57,6 +57,12 @@
 
     "system-settings": [
         {
+            "key": "onesec-api-token",
+            "name": "<h6><strong>OneSec API token</strong></h6><i>Token REDCap will use to push data to OneSec App.</i>",
+            "required": true,
+            "type": "text"
+        },
+        {
             "key": "redcap-api-token",
             "name": "<h6><strong>API token</strong></h6><i>Token OneSec will use to create records in REDCap.</i>",
             "required": true,
